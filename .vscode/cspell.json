@@ -1,0 +1,33 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "CHRONOCOSM",
+    "CODEOWNER",
+    "covermode",
+    "coverpkg",
+    "coverprofile",
+    "dockerhub",
+    "dockter",
+    "docktermj",
+    "golangci",
+    "gotest",
+    "gotestfmt",
+    "gotesttools",
+    "govulncheck",
+    "wraperror"
+  ],
+  "ignorePaths": [
+    ".dockerignore",
+    ".git/*",
+    ".github/linters/.golangci.yaml",
+    ".gitignore",
+    ".history/*",
+    "**/*.go",
+    "**/*.mod",
+    "**/*.sum",
+    "bearer.ignore",
+    "Makefile",
+    "testdata/**"
+  ]
+}
