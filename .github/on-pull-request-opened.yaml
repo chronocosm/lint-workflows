@@ -1,0 +1,32 @@
+name: On pull request opened main branch
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+  workflow_dispatch:
+
+permissions:
+  repository-projects: write
+
+jobs:
+  on-pull-request-opened:
+    name: On pull request opened main branch job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure private token
+        env:
+          GH_ACCESS_TOKEN: ${{ secrets.CHRONOCOSM_GITHUB_ACCESS_TOKEN }}
+        run: |
+          git config --global url."https://${GH_ACCESS_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
+      - name: Spell check
+        uses: streetsidesoftware/cspell-action@v7
+        with:
+          config: .vscode/cspell.json
