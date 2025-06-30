@@ -1,0 +1,34 @@
+name: "Create vM.m.P-style tag for a M.m.P tag"
+description: "Create a tag in the form v<Semantic-Version>."
+author: support@chronocosm.com
+
+inputs:
+  default-branch:
+    default: main
+    description: "Default branch of the repository"
+  validate-all-codebase:
+    default: false
+    description: "Lint all files or only modified: true/false."
+outputs:
+  job-status:
+    description: "job status"
+    value: ${{ jobs.changes.outputs.job-status && jobs.lint-workflows.outputs.job-status }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: checkout repository
+      uses: actions/checkout@v4
+
+    - name: lint code base
+      uses: super-linter/super-linter@v7.4.0
+      env:
+        DEFAULT_BRANCH: ${{ inputs.default-branch }}
+        FILTER_REGEX_INCLUDE: .*.github/workflows/.*
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # only lint new and modified files
+        VALIDATE_ALL_CODEBASE: ${{ inputs.validate-all-codebase }}
+
+branding:
+  icon: "check-square"
+  color: "green"
