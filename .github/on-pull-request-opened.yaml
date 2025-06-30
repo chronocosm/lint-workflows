@@ -2,8 +2,6 @@ name: On pull request opened main branch
 
 on:
   pull_request:
-    types:
-      - opened
   workflow_dispatch:
 
 permissions:
