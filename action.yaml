@@ -21,7 +21,7 @@ runs:
       uses: actions/checkout@v4
 
     - name: lint code base
-      uses: super-linter/super-linter@v7.4.0
+      uses: super-linter/super-linter@v8.3.0
       env:
         DEFAULT_BRANCH: ${{ inputs.default-branch }}
         FILTER_REGEX_INCLUDE: .*.github/workflows/.*
