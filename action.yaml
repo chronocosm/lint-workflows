@@ -18,7 +18,7 @@ runs:
   using: "composite"
   steps:
     - name: checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: lint code base
       uses: super-linter/super-linter@v7.4.0
