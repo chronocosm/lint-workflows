@@ -7,18 +7,18 @@ inputs:
     default: main
     description: "Default branch of the repository"
   validate-all-codebase:
-    default: false
+    default: "false"
     description: "Lint all files or only modified: true/false."
-outputs:
-  job-status:
-    description: "job status"
-    value: ${{ jobs.changes.outputs.job-status && jobs.lint-workflows.outputs.job-status }}
 
 runs:
   using: "composite"
   steps:
     - name: checkout repository
       uses: actions/checkout@v4
+      with:
+        # super-linter needs the full git history to get the
+        # list of files that changed across commits
+        fetch-depth: 0
 
     - name: lint code base
       uses: super-linter/super-linter@v7.4.0
@@ -26,7 +26,6 @@ runs:
         DEFAULT_BRANCH: ${{ inputs.default-branch }}
         FILTER_REGEX_INCLUDE: .*.github/workflows/.*
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # only lint new and modified files
         VALIDATE_ALL_CODEBASE: ${{ inputs.validate-all-codebase }}
 
 branding:
